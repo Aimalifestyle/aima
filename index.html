@@ -1,0 +1,1068 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aima Lifestyle</title>
+  <meta name="description" content="A clean, minimal home for Aima’s photos and updates." />
+
+  <!-- Apple-ish system font stack -->
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text: #0b0c0f;
+      --muted: rgba(11,12,15,.64);
+      --hairline: rgba(11,12,15,.10);
+      --soft: rgba(11,12,15,.06);
+      --card: rgba(11,12,15,.03);
+      --shadow: 0 18px 60px rgba(0,0,0,.08);
+      --shadow2: 0 10px 30px rgba(0,0,0,.06);
+      --radius: 22px;
+      --radius2: 28px;
+      --max: 1120px;
+
+      /* Apple-ish blue (not exact) */
+      --accent: #0071e3;
+      --accentHover: #0066cc;
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height: 100%; }
+    body{
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      letter-spacing: .2px;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    img{ max-width: 100%; display: block; }
+    .container{ max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+
+    /* Top bar (Apple-ish) */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .nav{
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 180px;
+    }
+    .mark{
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(0,113,227,.20), rgba(0,113,227,.08));
+      border: 1px solid rgba(0,113,227,.22);
+      box-shadow: 0 12px 24px rgba(0,113,227,.08);
+    }
+    .brand b{
+      font-size: 14px;
+      letter-spacing: .25px;
+    }
+    .brand span{
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .navlinks{
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      justify-content: center;
+      flex: 1;
+    }
+    .navlinks a{
+      font-size: 12.5px;
+      color: rgba(11,12,15,.74);
+      transition: color .12s ease;
+      padding: 10px 2px;
+    }
+    .navlinks a:hover{ color: rgba(11,12,15,.92); }
+
+    .navRight{
+      min-width: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid var(--hairline);
+      background: rgba(255,255,255,.70);
+      box-shadow: 0 1px 0 rgba(255,255,255,.9) inset;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      white-space: nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.92);
+      border-color: rgba(11,12,15,.16);
+    }
+    .btnPrimary{
+      border: 0;
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(0,113,227,.18);
+    }
+    .btnPrimary:hover{ background: var(--accentHover); }
+
+    /* Mobile nav */
+    .menuBtn{
+      display: none;
+      border: 1px solid var(--hairline);
+      background: rgba(255,255,255,.70);
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    @media (max-width: 900px){
+      .navlinks{ display: none; }
+      .menuBtn{ display: inline-flex; }
+      .brand, .navRight{ min-width: auto; }
+    }
+
+    /* Hero */
+    .hero{
+      padding: 56px 0 26px;
+    }
+    .heroWrap{
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.00));
+      border: 1px solid var(--soft);
+      box-shadow: var(--shadow2);
+      overflow: hidden;
+    }
+    .heroInner{
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 0;
+      align-items: stretch;
+    }
+    .heroLeft{
+      padding: 44px 40px;
+    }
+    .kicker{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--soft);
+      background: rgba(0,0,0,.02);
+      color: rgba(11,12,15,.72);
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+    .dot{
+      width: 8px; height: 8px;
+      border-radius: 99px;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(0,113,227,.12);
+    }
+    h1{
+      margin: 16px 0 10px;
+      font-size: clamp(34px, 4.6vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.6px;
+    }
+    .lead{
+      margin: 0 0 20px;
+      max-width: 56ch;
+      color: rgba(11,12,15,.72);
+      font-size: 15.5px;
+      line-height: 1.75;
+    }
+    .heroActions{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .link{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-weight: 650;
+      font-size: 13.5px;
+      padding: 10px 8px;
+      border-radius: 999px;
+      transition: background .12s ease;
+    }
+    .link:hover{ background: rgba(0,113,227,.08); }
+    .arrow{ font-weight: 900; }
+
+    .heroRight{
+      border-left: 1px solid var(--soft);
+      background: rgba(0,0,0,.015);
+      display: grid;
+      grid-template-rows: 1fr auto;
+    }
+    .heroImg{
+      min-height: 380px;
+      background: #f6f7f9;
+      position: relative;
+      overflow: hidden;
+    }
+    .heroImg img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.01);
+    }
+    .heroNote{
+      padding: 16px 18px;
+      border-top: 1px solid var(--soft);
+      color: rgba(11,12,15,.66);
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 900px){
+      .hero{ padding: 36px 0 16px; }
+      .heroInner{ grid-template-columns: 1fr; }
+      .heroLeft{ padding: 34px 22px; }
+      .heroRight{ border-left: 0; border-top: 1px solid var(--soft); }
+      .heroImg{ min-height: 300px; }
+    }
+
+    /* Section base */
+    section{ padding: 34px 0; }
+    .sectionTop{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    h2{
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: -0.3px;
+    }
+    .sub{
+      margin: 0;
+      color: rgba(11,12,15,.62);
+      font-size: 13.5px;
+      line-height: 1.6;
+      max-width: 72ch;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Aima Lifestyle Home">
+          <span class="mark" aria-hidden="true"></span>
+          <div>
+            <b>Aima Lifestyle</b>
+            <span>Minimal • Clean • Official</span>
+          </div>
+        </a>
+
+        <nav class="navlinks" aria-label="Main">
+          <a href="#gallery">Gallery</a>
+          <a href="#about">About</a>
+          <a href="#updates">Updates</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="navRight">
+          <button class="menuBtn" type="button" onclick="toggleMenu()">Menu</button>
+          <!-- Replace with your real social link -->
+          <a class="btn" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn btnPrimary" href="#gallery">View photos</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="container hero">
+      <div class="heroWrap">
+        <div class="heroInner">
+          <div class="heroLeft">
+            <div class="kicker"><span class="dot" aria-hidden="true"></span>Welcome to the official site</div>
+            <h1>A simple, beautiful space for Aima.</h1>
+            <p class="lead">
+              Clean. Minimal. Premium — like an Apple-style landing page.
+              For now it’s a photo home. Later, when you’re ready, we can add a “shop” page without changing the design.
+            </p>
+
+            <div class="heroActions">
+              <!-- Replace with real social links -->
+              <a class="btn btnPrimary" href="https://instagram.com/" target="_blank" rel="noopener">Follow on Instagram</a>
+              <a class="btn" href="https://tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+              <a class="link" href="#gallery">Explore the gallery <span class="arrow">›</span></a>
+            </div>
+          </div>
+
+          <div class="heroRight">
+            <div class="heroImg" aria-label="Featured image">
+              <!-- Put your best photo here: /images/hero.jpg -->
+              <img src="images/hero.jpg" alt="Featured photo"
+                   onerror="this.src='https://images.unsplash.com/photo-1520975693415-35ee7b6ac12f?auto=format&fit=crop&w=1600&q=80'; this.alt='Sample image';">
+            </div>
+            <div class="heroNote">
+              Tip: Put the site link in her bio. It makes the brand feel real and professional immediately.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 2 will continue from here -->
+    <section id="gallery">
+      <div class="container">
+        <div class="sectionTop">
+          <div>
+            <h2>Gallery</h2>
+            <p class="sub">A clean grid. Tap any photo to view it full size.</p>
+          </div>
+          <p class="sub" style="text-align:right">Suggested: 12–24 photos.</p>
+        </div>
+
+        <style>
+          /* Gallery */
+          .grid{
+            display:grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 14px;
+          }
+          .tile{
+            grid-column: span 4;
+            border-radius: var(--radius);
+            overflow:hidden;
+            border: 1px solid var(--soft);
+            background: #f6f7f9;
+            box-shadow: 0 1px 0 rgba(255,255,255,.9) inset;
+            cursor: pointer;
+            transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
+            position: relative;
+            min-height: 220px;
+          }
+          .tile:hover{
+            transform: translateY(-2px);
+            box-shadow: var(--shadow2);
+            border-color: rgba(11,12,15,.10);
+          }
+          .tile img{
+            width:100%;
+            height:100%;
+            object-fit: cover;
+          }
+
+          .pill{
+            position:absolute;
+            left: 12px;
+            bottom: 12px;
+            padding: 8px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.82);
+            border: 1px solid rgba(11,12,15,.08);
+            color: rgba(11,12,15,.75);
+            font-size: 12px;
+            font-weight: 650;
+            backdrop-filter: blur(10px);
+          }
+
+          /* Make first tile bigger for “Apple hero card” feel */
+          .tile.feature{
+            grid-column: span 8;
+            min-height: 340px;
+          }
+
+          @media (max-width: 900px){
+            .tile{ grid-column: span 6; }
+            .tile.feature{ grid-column: span 12; min-height: 300px; }
+          }
+          @media (max-width: 560px){
+            .tile{ grid-column: span 12; min-height: 240px; }
+          }
+        </style>
+
+        <div class="grid" id="galleryGrid">
+          <!-- IMPORTANT: Replace these file names with your real photos in /images -->
+          <!-- Tip: Use JPG files for best speed -->
+
+          <div class="tile feature" data-full="images/aima-01.jpg" data-caption="Aima Lifestyle — featured">
+            <img src="images/aima-01.jpg" alt="Featured photo"
+                 onerror="this.src='https://images.unsplash.com/photo-1520975758330-9e0d5aebc68d?auto=format&fit=crop&w=1600&q=80';">
+            <div class="pill">Featured</div>
+          </div>
+
+          <div class="tile" data-full="images/aima-02.jpg" data-caption="Moment">
+            <img src="images/aima-02.jpg" alt="Gallery photo 2"
+                 onerror="this.src='https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80';">
+            <div class="pill">Moment</div>
+          </div>
+
+          <div class="tile" data-full="images/aima-03.jpg" data-caption="Simple">
+            <img src="images/aima-03.jpg" alt="Gallery photo 3"
+                 onerror="this.src='https://images.unsplash.com/photo-1520975693415-35ee7b6ac12f?auto=format&fit=crop&w=1200&q=80';">
+            <div class="pill">Simple</div>
+          </div>
+
+          <div class="tile" data-full="images/aima-04.jpg" data-caption="Weekend">
+            <img src="images/aima-04.jpg" alt="Gallery photo 4"
+                 onerror="this.src='https://images.unsplash.com/photo-1520975682034-7f3f4b1b6ef2?auto=format&fit=crop&w=1200&q=80';">
+            <div class="pill">Weekend</div>
+          </div>
+
+          <div class="tile" data-full="images/aima-05.jpg" data-caption="Daily">
+            <img src="images/aima-05.jpg" alt="Gallery photo 5"
+                 onerror="this.src='https://images.unsplash.com/photo-1520975851845-6f058f0d0b5d?auto=format&fit=crop&w=1200&q=80';">
+            <div class="pill">Daily</div>
+          </div>
+
+          <div class="tile" data-full="images/aima-06.jpg" data-caption="New">
+            <img src="images/aima-06.jpg" alt="Gallery photo 6"
+                 onerror="this.src='https://images.unsplash.com/photo-1520975732131-6a9a1cdccb9d?auto=format&fit=crop&w=1200&q=80';">
+            <div class="pill">New</div>
+          </div>
+
+          <div class="tile" data-full="images/aima-07.jpg" data-caption="Clean">
+            <img src="images/aima-07.jpg" alt="Gallery photo 7"
+                 onerror="this.src='https://images.unsplash.com/photo-1520975958225-1b8f08fd9d69?auto=format&fit=crop&w=1200&q=80';">
+            <div class="pill">Clean</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="sectionTop">
+          <div>
+            <h2>About</h2>
+            <p class="sub">Short, warm, and simple.</p>
+          </div>
+        </div>
+
+        <style>
+          .cards{
+            display:grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 14px;
+          }
+          .cardW{
+            border: 1px solid var(--soft);
+            border-radius: var(--radius2);
+            background: #fff;
+            box-shadow: var(--shadow2);
+            overflow: hidden;
+          }
+          .cardPad{ padding: 22px; }
+          .aboutTitle{
+            margin: 0 0 8px;
+            font-size: 18px;
+            letter-spacing: -0.2px;
+          }
+          .aboutText{
+            margin: 0;
+            color: rgba(11,12,15,.70);
+            font-size: 14.5px;
+            line-height: 1.8;
+          }
+          .miniLine{
+            margin-top: 14px;
+            color: rgba(11,12,15,.52);
+            font-size: 12.5px;
+            line-height: 1.7;
+          }
+
+          .stats{
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 14px;
+          }
+          .stat{
+            padding: 14px;
+            border-radius: 18px;
+            background: rgba(11,12,15,.02);
+            border: 1px solid rgba(11,12,15,.06);
+          }
+          .stat b{
+            display:block;
+            font-size: 18px;
+            letter-spacing: -0.3px;
+          }
+          .stat span{
+            display:block;
+            margin-top: 6px;
+            font-size: 12.5px;
+            color: rgba(11,12,15,.60);
+            line-height: 1.5;
+          }
+
+          @media (max-width: 900px){
+            .cards{ grid-template-columns: 1fr; }
+          }
+        </style>
+
+        <div class="cards">
+          <div class="cardW">
+            <div class="cardPad">
+              <p class="aboutTitle"><b>Hi, I’m Aima 👋</b></p>
+              <p class="aboutText">
+                Welcome to my official website. I love sharing simple lifestyle moments, photos, and fun ideas.
+                Thank you for visiting — more updates will be posted here soon.
+              </p>
+              <p class="miniLine">
+                (You can change this text anytime. Even 1–2 sentences is perfect.)
+              </p>
+            </div>
+          </div>
+
+          <div class="cardW">
+            <div class="cardPad">
+              <p class="aboutTitle"><b>Quick links</b></p>
+              <p class="aboutText" style="margin-bottom: 12px;">
+                Keep it minimal. These buttons can go to her real social accounts.
+              </p>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+                <a class="btn" href="https://tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+                <a class="btn" href="#contact">Contact</a>
+              </div>
+
+              <div class="stats">
+                <div class="stat">
+                  <b id="statPhotos">7</b>
+                  <span>photos on site</span>
+                </div>
+                <div class="stat">
+                  <b>New</b>
+                  <span>updates coming soon</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="updates">
+      <div class="container">
+        <div class="sectionTop">
+          <div>
+            <h2>Updates</h2>
+            <p class="sub">A simple “Apple-style” announcement area — no product decisions needed.</p>
+          </div>
+        </div>
+
+        <style>
+          .updates{
+            display:grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 14px;
+          }
+          .uCard{
+            grid-column: span 6;
+            border-radius: var(--radius2);
+            border: 1px solid var(--soft);
+            background: linear-gradient(180deg, rgba(11,12,15,.02), rgba(11,12,15,.00));
+            box-shadow: var(--shadow2);
+            overflow:hidden;
+          }
+          .uPad{ padding: 20px; }
+          .uTop{
+            display:flex;
+            justify-content: space-between;
+            align-items:center;
+            gap: 10px;
+            margin-bottom: 10px;
+          }
+          .badge{
+            font-size: 12px;
+            font-weight: 700;
+            padding: 7px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(11,12,15,.08);
+            background: rgba(255,255,255,.85);
+            color: rgba(11,12,15,.70);
+          }
+          .date{
+            font-size: 12px;
+            color: rgba(11,12,15,.50);
+            font-weight: 600;
+          }
+          .uTitle{
+            margin: 0 0 8px;
+            font-size: 16px;
+            letter-spacing: -0.2px;
+          }
+          .uText{
+            margin: 0;
+            color: rgba(11,12,15,.70);
+            font-size: 14px;
+            line-height: 1.8;
+          }
+          @media (max-width: 900px){
+            .uCard{ grid-column: span 12; }
+          }
+        </style>
+
+        <div class="updates">
+          <div class="uCard">
+            <div class="uPad">
+              <div class="uTop">
+                <span class="badge">New</span>
+                <span class="date" id="todayDate"></span>
+              </div>
+              <p class="uTitle"><b>Official website is live</b></p>
+              <p class="uText">
+                Welcome! This is Aima’s clean home online. Photos are updated regularly — follow on social media too.
+              </p>
+            </div>
+          </div>
+
+          <div class="uCard">
+            <div class="uPad">
+              <div class="uTop">
+                <span class="badge">Coming soon</span>
+                <span class="date">Next milestone</span>
+              </div>
+              <p class="uTitle"><b>Something special will launch here</b></p>
+              <p class="uText">
+                When the followers reach a big goal, we’ll release something exciting. For now, enjoy the gallery.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox (Apple clean) -->
+    <style>
+      .lightbox{
+        position: fixed;
+        inset: 0;
+        display: none;
+        place-items: center;
+        padding: 18px;
+        background: rgba(0,0,0,.55);
+        z-index: 999;
+      }
+      .lightbox.open{ display: grid; }
+
+      .lbShell{
+        width: min(1100px, 96vw);
+        border-radius: 26px;
+        overflow: hidden;
+        background: rgba(255,255,255,.92);
+        border: 1px solid rgba(255,255,255,.55);
+        box-shadow: 0 30px 90px rgba(0,0,0,.22);
+        backdrop-filter: blur(12px);
+      }
+      .lbImg{
+        width: 100%;
+        height: min(72vh, 760px);
+        object-fit: contain;
+        background: rgba(0,0,0,.06);
+      }
+      .lbBar{
+        display:flex;
+        justify-content: space-between;
+        align-items:center;
+        gap: 10px;
+        padding: 12px 14px;
+        border-top: 1px solid rgba(11,12,15,.10);
+        color: rgba(11,12,15,.70);
+        font-size: 13px;
+      }
+      .lbBtns{
+        display:flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+    </style>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <div class="lbShell" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <img class="lbImg" id="lbImg" src="" alt="Full size photo">
+        <div class="lbBar">
+          <div id="lbCaption">Photo</div>
+          <div class="lbBtns">
+            <button class="btn" type="button" onclick="prevImg()">Prev</button>
+            <button class="btn" type="button" onclick="nextImg()">Next</button>
+            <button class="btn btnPrimary" type="button" onclick="closeLightbox()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 3 will add Contact + Footer + Mobile menu + JS closing tags -->
+    <section id="contact">
+      <div class="container">
+        <div class="sectionTop">
+          <div>
+            <h2>Contact</h2>
+            <p class="sub">Keep it simple and private (messages go to your email).</p>
+          </div>
+        </div>
+
+        <style>
+          .contactWrap{
+            border-radius: var(--radius2);
+            border: 1px solid var(--soft);
+            background: #fff;
+            box-shadow: var(--shadow2);
+            overflow: hidden;
+          }
+          .contactInner{
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+          }
+          .contactLeft{
+            padding: 22px;
+            border-right: 1px solid var(--soft);
+            background: linear-gradient(180deg, rgba(11,12,15,.02), rgba(11,12,15,.00));
+          }
+          .contactRight{
+            padding: 22px;
+          }
+          .hint{
+            margin: 0;
+            color: rgba(11,12,15,.68);
+            font-size: 13.5px;
+            line-height: 1.8;
+          }
+          .list{
+            margin: 12px 0 0;
+            padding: 0;
+            list-style: none;
+            display:grid;
+            gap: 10px;
+          }
+          .li{
+            padding: 12px 12px;
+            border-radius: 18px;
+            border: 1px solid rgba(11,12,15,.06);
+            background: rgba(255,255,255,.65);
+            color: rgba(11,12,15,.72);
+            font-size: 13px;
+            line-height: 1.6;
+          }
+          .li b{ color: rgba(11,12,15,.88); }
+
+          .form{
+            display:grid;
+            gap: 10px;
+          }
+          .field{
+            display:grid;
+            gap: 6px;
+          }
+          label{
+            font-size: 12.5px;
+            font-weight: 650;
+            color: rgba(11,12,15,.72);
+          }
+          input, textarea{
+            width: 100%;
+            padding: 12px 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(11,12,15,.10);
+            background: rgba(11,12,15,.02);
+            color: rgba(11,12,15,.90);
+            outline: none;
+            font-size: 14px;
+            transition: border-color .12s ease, background .12s ease;
+          }
+          input:focus, textarea:focus{
+            border-color: rgba(0,113,227,.35);
+            background: rgba(0,113,227,.05);
+          }
+          textarea{
+            min-height: 130px;
+            resize: vertical;
+          }
+
+          .formRow{
+            display:flex;
+            align-items:center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 2px;
+          }
+          .tiny{
+            font-size: 12px;
+            color: rgba(11,12,15,.55);
+            line-height: 1.6;
+          }
+
+          @media (max-width: 900px){
+            .contactInner{ grid-template-columns: 1fr; }
+            .contactLeft{ border-right: 0; border-bottom: 1px solid var(--soft); }
+          }
+        </style>
+
+        <div class="contactWrap">
+          <div class="contactInner">
+            <div class="contactLeft">
+              <p style="margin:0 0 10px; font-size:16px; letter-spacing:-0.2px;"><b>Quick notes</b></p>
+              <p class="hint">
+                This site is designed to feel premium and minimal.
+                For privacy, keep all contact going to you (parent/guardian).
+              </p>
+
+              <ul class="list">
+                <li class="li"><b>Brand vibe:</b> clean white, modern, Apple-inspired spacing.</li>
+                <li class="li"><b>Next step later:</b> add a Shop page when you decide what to sell.</li>
+                <li class="li"><b>Safety:</b> avoid school names, locations, and personal details.</li>
+              </ul>
+
+              <div style="margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn" href="#gallery">Back to Gallery</a>
+                <a class="btn btnPrimary" href="#top">Top</a>
+              </div>
+            </div>
+
+            <div class="contactRight">
+              <p style="margin:0 0 10px; font-size:16px; letter-spacing:-0.2px;"><b>Send a message</b></p>
+              <p class="tiny" style="margin-top:-2px;">
+                100% free: the button opens your email app (no paid backend needed).
+              </p>
+
+              <div class="form">
+                <div class="field">
+                  <label for="cName">Name</label>
+                  <input id="cName" type="text" placeholder="Your name" autocomplete="name">
+                </div>
+
+                <div class="field">
+                  <label for="cEmail">Email</label>
+                  <input id="cEmail" type="email" placeholder="your@email.com" autocomplete="email">
+                </div>
+
+                <div class="field">
+                  <label for="cMsg">Message</label>
+                  <textarea id="cMsg" placeholder="Write your message..."></textarea>
+                </div>
+
+                <div class="formRow">
+                  <button class="btn btnPrimary" type="button" onclick="sendMail()">Send</button>
+                  <span class="tiny">Sends to: <b id="toEmailLabel">hello@aimalifestyle.com</b></span>
+                </div>
+
+                <p class="tiny" style="margin:6px 0 0;">
+                  Want it to go to your Gmail? Tell me the email you want and I’ll update it in the code.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      footer{
+        padding: 34px 0 46px;
+        border-top: 1px solid var(--hairline);
+        margin-top: 26px;
+        color: rgba(11,12,15,.58);
+        font-size: 13px;
+      }
+      .footRow{
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .footLinks{
+        display:flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .footLinks a{
+        color: rgba(11,12,15,.62);
+      }
+      .footLinks a:hover{
+        color: rgba(11,12,15,.86);
+      }
+
+      /* Mobile menu panel */
+      .mobileMenu{
+        display:none;
+        border-top: 1px solid var(--hairline);
+        background: rgba(255,255,255,.90);
+      }
+      .mobileMenu.open{ display:block; }
+      .mobileMenu .container{
+        padding: 10px 20px 14px;
+      }
+      .mLink{
+        display:block;
+        padding: 12px 4px;
+        border-bottom: 1px solid rgba(11,12,15,.06);
+        color: rgba(11,12,15,.78);
+        font-size: 13.5px;
+        font-weight: 650;
+      }
+      .mLink:last-child{ border-bottom: 0; }
+    </style>
+
+    <div class="mobileMenu" id="mobileMenu" aria-label="Mobile Menu">
+      <div class="container">
+        <a class="mLink" href="#gallery" onclick="toggleMenu(true)">Gallery</a>
+        <a class="mLink" href="#about" onclick="toggleMenu(true)">About</a>
+        <a class="mLink" href="#updates" onclick="toggleMenu(true)">Updates</a>
+        <a class="mLink" href="#contact" onclick="toggleMenu(true)">Contact</a>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="footRow">
+          <div>© <span id="year"></span> Aima Lifestyle</div>
+          <div class="footLinks">
+            <a href="#top">Top</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // ====== SETTINGS YOU MAY WANT TO CHANGE ======
+    const TO_EMAIL = "hello@aimalifestyle.com"; // change if you want messages to go to your email
+    document.getElementById("toEmailLabel").textContent = TO_EMAIL;
+
+    // ====== Footer year ======
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ====== Today date in Updates ======
+    const d = new Date();
+    const fmt = d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+    const todayEl = document.getElementById("todayDate");
+    if (todayEl) todayEl.textContent = fmt;
+
+    // ====== Gallery stats ======
+    const tiles = Array.from(document.querySelectorAll(".tile"));
+    const statPhotos = document.getElementById("statPhotos");
+    if (statPhotos) statPhotos.textContent = String(tiles.length);
+
+    // ====== Mobile menu ======
+    function toggleMenu(forceClose){
+      const mm = document.getElementById("mobileMenu");
+      if (!mm) return;
+      if (forceClose === true){
+        mm.classList.remove("open");
+        return;
+      }
+      mm.classList.toggle("open");
+    }
+    window.toggleMenu = toggleMenu;
+
+    // ====== Contact (100% free) ======
+    function sendMail(){
+      const name = encodeURIComponent((document.getElementById("cName").value || "").trim());
+      const email = encodeURIComponent((document.getElementById("cEmail").value || "").trim());
+      const msg = encodeURIComponent((document.getElementById("cMsg").value || "").trim());
+
+      const subject = encodeURIComponent("Aima Lifestyle — Website message");
+      const body =
+        `Name: ${name}%0D%0A` +
+        `Email: ${email}%0D%0A%0D%0A` +
+        `Message:%0D%0A${msg}`;
+
+      window.location.href = `mailto:${TO_EMAIL}?subject=${subject}&body=${body}`;
+    }
+    window.sendMail = sendMail;
+
+    // ====== Lightbox ======
+    const lightbox = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbCaption = document.getElementById("lbCaption");
+    let currentIndex = 0;
+
+    function openLightbox(index){
+      currentIndex = index;
+      const t = tiles[currentIndex];
+      const full = t.getAttribute("data-full");
+      const cap = t.getAttribute("data-caption") || "Photo";
+      lbImg.src = full;
+      lbCaption.textContent = cap;
+
+      lightbox.classList.add("open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox(){
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      lbImg.src = "";
+    }
+
+    function nextImg(){
+      currentIndex = (currentIndex + 1) % tiles.length;
+      openLightbox(currentIndex);
+    }
+
+    function prevImg(){
+      currentIndex = (currentIndex - 1 + tiles.length) % tiles.length;
+      openLightbox(currentIndex);
+    }
+
+    window.closeLightbox = closeLightbox;
+    window.nextImg = nextImg;
+    window.prevImg = prevImg;
+
+    tiles.forEach((t, idx) => {
+      t.addEventListener("click", () => openLightbox(idx));
+    });
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") nextImg();
+      if (e.key === "ArrowLeft") prevImg();
+    });
+  </script>
+</body>
+</html>
